@@ -1,0 +1,91 @@
+<div class="dux-page-header am-cf">
+    <div class="page-title">
+        <a class="am-btn am-btn-primary" href="{url('index')}"> 筛选列表</a>
+    </div>
+    <div class="page-action">
+        <a class="am-btn am-btn-danger" href="javascript:location.reload();"><i class="am-icon-refresh"></i></a>
+    </div>
+</div>
+
+<div class="dux-body">
+    <div class="am-panel am-panel-default dux-panel">
+        <div class="am-panel-hd">{$assignName}筛选</div>
+        <div class="am-panel-bd">
+            <form class="am-form  am-form-horizontal dux-form" id="form" data-mango="form-bind" method="post">
+                <fieldset>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">名称</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="name" value="{$info.name}" placeholder="请输入筛选名称" required>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">筛选属性</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <a class="am-btn am-btn-success am-margin-bottom" id="add-attr" href="javascript:;"> 增加属性</a>
+                            <br>
+                            <table class="am-table dux-table">
+                                <thead>
+                                <tr>
+                                    <th>属性名</th>
+                                    <th>类型</th>
+                                    <th>选择属性,分割多个</th>
+                                    <th width="80">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="attr-list">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                            <input type="hidden" name="filter_id" value="{$info.filter_id}">
+                            <button class="am-btn am-btn-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tpl-attr">
+    {{# for(var i in d){ }}
+    <tr>
+        <td>
+            <input type="hidden" name="attr[attr_id][]" value="{{ d[i].attr_id }}" >
+            <input type="text" name="attr[name][]" value="{{ d[i].name }}" datatype="s">
+        </td>
+        <td>
+            <select  name="attr[type][]">
+                <option value="0" {{# if(d[i].type == 0){ }} selected {{# } }} >单选</option>
+                <option value="1" {{# if(d[i].type == 1){ }} selected {{# } }} >多选</option>
+            </select>
+        </td>
+        <td><input type="text" name="attr[value][]"  value="{{ d[i].value }}" datatype="*"></td>
+        <td>
+            <button class="am-btn am-btn-danger am-btn-sm js-del" type="button">删除</button>
+        </td>
+    </tr>
+    {{# } }}
+</script>
+<script>
+    var attrData = {json_encode($attrList)};
+    Do('base', 'tpl', function () {
+        function addAttr(data){
+            var tpl = $('#tpl-attr').html();
+            laytpl(tpl).render(data, function(html){
+                $('#attr-list').append(html);
+            });
+        }
+        $('#add-attr').on('click', function() {
+            var data = [{'name': '','value':'','attr_id':''}];
+            addAttr(data);
+        });
+        $('#attr-list').on('click','.js-del',function(){
+            $(this).parents('tr').remove();
+        });
+        addAttr(attrData);
+    });
+</script>

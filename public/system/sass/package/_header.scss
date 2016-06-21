@@ -1,0 +1,52 @@
+.dux-header {
+  position: fixed;
+  width: 100%;
+  border: none;
+  z-index: 100;
+  top: 0;
+  .am-topbar {
+    border: none;
+    margin-bottom: 0;
+  }
+  .am-topbar-brand {
+    font-size: 1.6rem;
+    background: color('blue', 'base');
+  }
+  .am-topbar-inverse {
+    background: #333;
+  }
+
+  .am-topbar-nav > li {
+    & > a, &.am-active > a {
+      &:after {
+        display: none;
+      }
+      &, &:focus, &:hover {
+        color: #ccc;
+      }
+    }
+    & > a {
+      @media only screen and (min-width: 641px) {
+        padding: 0 15px;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, .5);
+      }
+    }
+    &.am-active > a {
+      &, &:focus, &:hover {
+        background-color: rgba(0, 0, 0, .5);
+      }
+    }
+  }
+  .am-nav-pills {
+    > li + li {
+      margin-left: 0;
+    }
+  }
+  .am-topbar-right {
+    margin: 0;
+  }
+
+}
+

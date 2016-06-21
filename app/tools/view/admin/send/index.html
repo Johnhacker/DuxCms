@@ -1,0 +1,69 @@
+<div data-mango="table-bind">
+    <div class="dux-page-header am-cf">
+        <div class="page-title">
+            <form class="am-form-inline" method="get" action="{url()}">
+                <div class="am-form-group">
+                    <input type="text" name="keyword" class="am-form-field" value="{$pageMaps.keyword}" placeholder="搜索">
+                </div>
+                <div class="am-form-group">
+                    <button type="submit" class="am-btn am-btn-primary am-icon-search"></button>
+                </div>
+            </form>
+        </div>
+        <div class="page-action">
+            <a class="am-btn am-btn-primary" href="{url('add')}">发送</a>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="am-table dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="80">#</th>
+                <th width="200">收信人</th>
+                <th width="*">标题</th>
+                <th width="100">类型</th>
+                <th width="150">时间</th>
+                <th class="am-text-center" width="100">状态</th>
+                <th width="100" class="am-text-center">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td>{$vo.send_id}</td>
+                <td>{$vo.receive}</td>
+                <td><a href="{url('info', ['id'=>$vo[$pri]])}">{$vo.title}</a></td>
+                <td>{$vo.type_name}</td>
+                <td>
+                    {date('Y/m/d H:i:s',$vo.start_time)}<br>
+                    <!--if{$vo.status}-->
+                    {date('Y/m/d H:i:s',$vo.stop_time)}
+                    <!--{else}-->
+                    未完成
+                    <!--{/if}-->
+                </td>
+
+                <td class="am-text-center">
+                    <!--if{$vo.status == 1}-->
+                    <span class="am-text-success">已发送</span>
+                    <!--{/if}-->
+                    <!--if{$vo.status == 2}-->
+                    <span class="am-text-danger">发送失败</span>
+                    <!--{/if}-->
+                    <!--if{!$vo.status}-->
+                    <span class="am-text-warning">未发送</span>
+                    <!--{/if}-->
+                </td>
+
+                <td class="am-text-center">
+                    <a class="am-btn am-btn-danger am-btn-xs" href="javascript:;" data-url="{url('del')}" data-id="{$vo[$pri]}" title="删除" data-del><i class=" am-icon-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot am-cf">
+        {$page}
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.dux-form {
+  fieldset {
+    margin-bottom:0;
+  }
+  .am-form-group:last-child {
+    margin-bottom:0;
+  }
+
+}
+
+@media only screen and (min-width: 641px) {
+  .am-form-inline .am-form-group {
+  }
+}
+
+.dux-form-content {
+  padding-top: .6em;
+}
+
+.dux-field-inline {
+  display: inline-block !important;
+  width: auto !important;
+}
+
+.dux-field-sm {
+  width: 50px !important;
+}
+
+.dux-field-md {
+  width: 100px !important;
+}
+
+.dux-field-lg {
+  width: 150px !important;
+}

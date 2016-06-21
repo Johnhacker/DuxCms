@@ -1,0 +1,31 @@
+body, html {
+  height: 100%;
+  background: #efefef;
+  color: #666;
+}
+
+html {
+  overflow-x:hidden;
+}
+body {
+  font-size:1.4rem;
+}
+
+.dux-g {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  @media all and (max-width: 641px) {
+    margin-left:-1rem;
+    margin-right: -1rem;
+  }
+}
+
+.dux-hide {
+  display: none;
+}
+
+.dux-dialog-foot {
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  text-align: right;
+}

@@ -1,0 +1,220 @@
+<div class="dux-page-header am-cf">
+    <div class="page-title">
+        <a class="am-btn am-btn-primary" href="{url('index', ['class_id' => $classId])}"> 文章列表</a>
+    </div>
+    <div class="page-action">
+        <a class="am-btn am-btn-danger" href="javascript:location.reload();"><i class="am-icon-refresh"></i></a>
+    </div>
+</div>
+
+<form class="am-form dux-form" data-mango="form-bind" method="post">
+    <div class="am-g">
+        <div class="am-u-lg-8">
+            <div class="am-panel am-panel-default dux-panel">
+
+                <div class="am-panel-hd">{$assignName}文章</div>
+                <div class="am-panel-bd">
+                    <fieldset>
+                        <div class="dux-flex-layout am-padding-bottom">
+                            <div class="flex-auto">
+                                <div class="am-form-group">
+                                    <label class="am-form-label">文章分类</label>
+                                    <div>
+                                        <select data-am-selected="{btnWidth: '100%'}" name="class_id" required>
+                                            <!--loop{(array)$classList as $vo}-->
+                                            <option <!--if{$vo.class_id == $classId}--> selected <!--{/if}-->
+                                            value="{$vo.class_id}">{$vo.cname}</option>
+                                            <!--{/loop}-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-form-label">文章标题</label>
+                                    <div>
+                                        <input type="text" name="title" value="{$info.title}" placeholder="请输入文章标题"
+                                               required>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div style="width: 170px; padding-top: 25px;" class="am-text-right">
+                                <!--if{$info.image}-->
+                                <img src="{$info.image}" id="image-pic" alt="" height="100" width="150">
+                                <!--{else}-->
+                                <img src="__PUBLIC__/system/images/no-pic.svg" id="image-pic" alt="" height="100"
+                                     width="150">
+                                <!--{/if}-->
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">文章封面图</label>
+                            <div>
+                                <div class="am-input-group">
+                                    <input class="am-form-field" name="image" id="image" value="{$info.image}"
+                                           placeholder="可选,上传文章封面图">
+                                        <span class="am-input-group-btn">
+                                            <button class="am-btn am-btn-default" type="button" data-mango="form-upload"
+                                                    data-target="#image" data-type="jpg,png,bmp"
+                                                    data-callback="imageUpload"><i
+                                                    class="am-icon-upload"></i></button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">推荐位</label>
+                            <div>
+                                <?php $posIds = explode(',', $info['pos_id']); ?>
+                                <select name="pos_id[]" multiple data-am-selected="{btnWidth: '100%'}">
+                                    <!--loop{$posList as $vo}-->
+                                    <option value="{$vo.pos_id}" <!--if{in_array($vo.pos_id, $posIds)}--> selected <!--{/if}-->>{$vo.name}</option>
+                                    <!--{/loop}-->
+                                </select>
+                            </div>
+                        </div>
+
+                        {$filterHtml}
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">正文内容</label>
+                            <div>
+                                <textarea data-mango="form-editor" name="content" style="height: 400px">{$info.content}</textarea>
+                            </div>
+                        </div>
+
+                        {$modelHtml}
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">关键词</label>
+                            <div>
+                                <input type="text" name="keyword" value="{$info.keyword}" data-mango="form-tags" placeholder="可选,文章关键词">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-form-label">文章描述</label>
+                            <div>
+                                <textarea name="description" placeholder="可选,文章描述">{$info.description}</textarea>
+                            </div>
+                        </div>
+                        <input type="hidden" name="content_id" value="{$info.content_id}">
+                        <input type="hidden" name="article_id" value="{$info.article_id}">
+                        <button class="am-btn am-btn-primary" type="submit" disabled>保存</button>
+
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-lg-4">
+            <div class="am-panel am-panel-default dux-panel">
+
+                <div class="am-panel-hd">可选信息</div>
+                <div class="am-panel-bd">
+                    <fieldset>
+                        <div class="am-form-group">
+                            <label class="am-form-label">副标题</label>
+                            <div>
+                                <input type="text" name="subtitle" value="{$info.subtitle}" placeholder="请输入副标题名称">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">发布时间</label>
+                            <div>
+                                <input type="text" data-mango="form-date" data-format="yyyy-mm-dd hh:ii" name="create_time" value="{$info.create_time ? date('Y-m-d H:i', $info.create_time) : date('Y-m-d H:i')}" placeholder="文章发布时间">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">文章顺序</label>
+                            <div>
+                                <input type="text" name="sort" value="{$info.sort ? $info.sort : 0}" placeholder="链接排序,按照从小->大排序列表">
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">外部链接</label>
+                            <div>
+                                <input type="text" name="url" value="{$info.url}" placeholder="请输入链接地址">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">模板名称</label>
+                            <div>
+                                    <select data-mango="form-chosen" name="tpl" required>
+                                        <option value="">==默认==</option>
+                                        <!--loop{$tplList as $vo}-->
+                                        <option value="{$vo.value}" <!--if{$info.tpl == $vo.value}-->  selected <!--{/if}--> >{$vo.name}</option>
+                                        <!--{/loop}-->
+                                    </select>
+
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">浏览量</label>
+                            <div>
+                                <input type="number" name="view" value="{$info.view}" placeholder="文章浏览次数">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">来源</label>
+                            <div>
+                                <input type="text" name="source" value="{$info.source}" placeholder="文章来源">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">作者</label>
+                            <div>
+                                <input type="text" name="auth" value="{$info.auth}" placeholder="文章作者">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">编辑</label>
+                            <div>
+                                <input type="text" name="editor" value="{$info.editor}" placeholder="文章编辑">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-form-label">文章状态</label>
+                            <div>
+                                <?php $info['status'] = isset($info['status']) ? $info['status'] : 1;  ?>
+                                <label class="am-radio-inline">
+                                    <!--if{$info['status']}-->
+                                    <input name="status" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input name="status" value="1" type="radio">
+                                    <!--{/if}-->
+                                    正常
+                                </label>
+                                <label class="am-radio-inline">
+                                    <!--if{!$info['status']}-->
+                                    <input name="status" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input name="status" value="0" type="radio">
+                                    <!--{/if}-->
+                                    隐藏
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    window.imageUpload = function (data) {
+        $('#image-pic').attr('src', data.url);
+    }
+</script>

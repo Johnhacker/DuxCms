@@ -1,0 +1,53 @@
+<div class="dux-body">
+    <div class="am-panel am-panel-default dux-panel">
+        <div class="am-panel-hd">修改资料</div>
+        <div class="am-panel-bd">
+            <form class="am-form  am-form-horizontal dux-form" data-mango="form-bind" method="post">
+                <fieldset>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">用户名</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="username" value="{$info.username}" placeholder="请输入用户名"
+                                   minlength="3" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">昵称</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="nickname" value="{$info.nickname}" placeholder="请输入昵称"
+                                   minlength="2" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">头像</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+
+                            <div class="am-input-group">
+                                <input class="am-form-field" name="avatar" id="avatar" value="{$info.avatar}"
+                                       placeholder="上传自定义头像">
+                                        <span class="am-input-group-btn">
+                                            <button class="am-btn am-btn-default" type="button" data-mango="form-upload"
+                                                    data-target="#avatar" data-type="jpg,png,bmp"><i
+                                                    class="am-icon-upload"></i></button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">密码</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input class="am-form-field" type="text" onfocus="this.type='password'" name="password"
+                                   placeholder="不修改密码请留空">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                            <input type="hidden" name="user_id" value="{$info.user_id}">
+                            <button class="am-btn am-btn-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

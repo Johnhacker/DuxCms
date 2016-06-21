@@ -1,0 +1,134 @@
+<div class="dux-page-header am-cf">
+    <div class="page-title">
+        <a class="am-btn am-btn-primary" href="{url('index')}"> 字段列表</a>
+    </div>
+    <div class="page-action">
+        <a class="am-btn am-btn-danger" href="javascript:location.reload();"><i class="am-icon-refresh"></i></a>
+    </div>
+</div>
+
+<div class="dux-body">
+    <div class="am-panel am-panel-default dux-panel">
+        <div class="am-panel-hd">{$assignName}字段</div>
+        <div class="am-panel-bd">
+            <form class="am-form  am-form-horizontal dux-form" data-mango="form-bind" method="post">
+                <fieldset>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">字段名称</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="name" value="{$info.name}" placeholder="请输入字段名称" required>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">字段标识</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="label" value="{$info.label}" placeholder="表单内唯一不重复标识,英文或者数字且英文开头" pattern="^[a-z]\w+$" required>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">字段类型</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select name="type" id="type">
+                                <!--loop{$type as $key => $vo}-->
+                                <option value="{$key}" <!--if{strtolower($key) == $info['type']}--> selected <!--{/if}--> >{$vo}({$key})</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">字段提示</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="tip" value="{$info.tip}" placeholder="字段输入提示" >
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">必要字段</label>
+                        <?php if(!isset($info['must'])) $info[ 'must']=1 ; ?>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <div class="am-g">
+                                <label class="am-radio-inline">
+                                    <!--if{$info['must']}-->
+                                    <input name="must" value="1" checked="checked" type="radio">
+                                    <!--{else}-->
+                                    <input name="must" value="1" type="radio">
+                                    <!--{/if}-->
+                                    必须
+                                </label>
+
+                                <label class="am-radio-inline">
+                                    <!--if{!$info['must']}-->
+                                    <input name="must" checked="checked" value="0" type="radio">
+                                    <!--{else}-->
+                                    <input name="must" value="0" type="radio">
+                                    <!--{/if}-->
+                                    非必须
+                                </label></div>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">字段配置</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <textarea name="config" id="config" disabled>{$info.config}</textarea>
+                            <div class="am-form-help" id="help">该字段暂不支持配置</div>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">默认值</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="default" value="{$info.default}" placeholder="字段输入为空时的默认值"
+                                   >
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">字段顺序</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="sort" value="{$info.sort}" placeholder="字段显示顺序小->大" >
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                            <input type="hidden" name="model_id" value="{$modelId}">
+                            <input type="hidden" name="field_id" value="{$info.field_id}">
+                            <button class="am-btn am-btn-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    Do('base', function () {
+        var help = function() {
+            app.ajax({
+                url : "{url('help')}",
+                type : 'post',
+                data : {type : $('#type').val()},
+                success : function($info) {
+                    if($info == '') {
+                        $('#config').attr('disabled', true);
+                        $('#help').text('该字段不支持配置');
+                    }else {
+                        $('#config').attr('disabled', false);
+                        $('#help').text($info);
+                    }
+                }
+
+            });
+        };
+        help();
+        $('#type').change(function() {
+            help();
+        });
+
+    });
+</script>

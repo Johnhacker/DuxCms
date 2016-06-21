@@ -1,0 +1,74 @@
+<div class="dux-body">
+    <div class="dux-box">
+        <div class="box-side">
+            <div class="am-panel am-panel-default dux-panel">
+                <ul class="am-nav">
+                    <li><a href="{url('site/Config/index')}">站点信息</a></li>
+                    <li class="am-active"><a href="{url('site/Config/tpl')}">模板设置</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="am-panel am-panel-default dux-panel">
+                <div class="am-panel-hd">模板设置</div>
+                <div class="am-panel-bd">
+                    <form class="am-form  am-form-horizontal dux-form" method="post" action="{url()}" data-mango="form-bind">
+                        <fieldset>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">模板目录</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <select data-mango="form-chosen" name="tpl_name" required>
+                                        <!--loop{$dirs as $vo}-->
+                                        <option value="{$vo}" <!--if{$info.tpl_name == $vo}-->  selected <!--{/if}--> >{$vo}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                    <div class="am-form-help">theme目录下的模板目录名</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">首页</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="tpl_index" value="{$info.tpl_index}" placeholder="" required>
+                                    <div class="am-form-help">首页模板名,不含后缀</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">默认栏目</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="tpl_class" value="{$info.tpl_class}" placeholder="" required>
+                                    <div class="am-form-help">默认分类模板名,不含后缀</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">默认内容</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="tpl_content" value="{$info.tpl_content}" placeholder="" required>
+                                    <div class="am-form-help">默认内容模板名,不含后缀</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">TAG列表</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="tpl_tags" value="{$info.tpl_tags}" placeholder="" required>
+                                    <div class="am-form-help">TAG列表基础模板名,不含后缀</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">搜索结果</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="tpl_search" value="{$info.tpl_search}" placeholder="" required>
+                                    <div class="am-form-help">搜索结果基础模板名,不含后缀</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                                    <button class="am-btn am-btn-primary" type="submit">保存</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

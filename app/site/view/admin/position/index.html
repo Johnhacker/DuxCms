@@ -1,0 +1,38 @@
+<div data-mango="table-bind">
+    <div class="dux-page-header am-cf">
+        <div class="page-title">
+            <a class="am-btn am-btn-primary" href="{url('index')}"> 刷新列表</a>
+        </div>
+        <div class="page-action">
+            <a class="am-btn am-btn-primary" href="{url('add')}">添加</a>
+        </div>
+    </div>
+    <div class="dux-page-table">
+        <table class="am-table dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="100">#</th>
+                <th>推荐位名称</th>
+                <th width="200">顺序</th>
+                <th class="am-text-center" width="120">管理</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td>{$vo.pos_id}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.sort}</td>
+                <td class="am-text-center">
+                    <a class="am-btn am-btn-primary am-btn-xs" href="{url('edit', ['id'=>$vo[$pri]])}" title="编辑"><i class="am-icon-pencil"></i></a>
+                    <a class="am-btn am-btn-danger am-btn-xs" href="javascript:;" data-url="{url('del')}" data-id="{$vo[$pri]}" title="删除" data-del><i class=" am-icon-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot am-cf">
+        {$page}
+    </div>
+</div>

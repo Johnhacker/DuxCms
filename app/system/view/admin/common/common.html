@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$sysInfo.title}</title>
+    <link rel="stylesheet" href="{$sysPublic}/system/css/amazeui.min.css">
+    <link rel="stylesheet" href="{$sysPublic}/system/css/style.css">
+    <script type="text/javascript" src="{$sysPublic}/system/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="{$sysPublic}/system/js/lib/amazeui.js"></script>
+    <script type="text/javascript" src="{$sysPublic}/system/js/lib/do.js" data-cfg-autoload="false"></script>
+    <script type="text/javascript" src="{$sysPublic}/system/js/lib/init.js" data-path="{$sysPublic}/system/js/" data-role="<?php echo ROLE_NAME; ?>" data-root="<?php ROOT_URL; ?>"></script>
+</head>
+<body>
+<aside class="dux-moblie-aside">
+    <ul>
+        <!--loop{$sysNav as $top}-->
+        <li>
+            <h3>{$top.name}</h3>
+            <ul>
+                <!--loop{$top.menu as $parent}-->
+                <li><h4><i class="am-icon-{$parent.icon}"></i> {$parent.name}</h4>
+                    <ul>
+                        <!--loop{$parent.menu as $sub}-->
+                        <li  <!--if{$sub.cur}-->class="active"<!--{/if}--> ><a href="{$sub.url}"><i class="am-icon-{$sub.icon}"></i> {$sub.name}</a></li>
+                        <!--{/loop}-->
+                    </ul>
+                </li>
+                <!--{/loop}-->
+            </ul>
+        </li>
+        <!--{/loop}-->
+    </ul>
+</aside>
+<header class="dux-moblie-header">
+    <h3>{$sysInfo.name}</h3>
+    <a href="javascript:;" class="menu-left" data-mango="base-menu"><i class="am-icon-bars"></i></a>
+    <a href="" class="menu-right"><i class="am-icon-cog"></i></a>
+</header>
+<div class="dux-html">
+    <header class="dux-header">
+        <nav class="am-topbar am-topbar-inverse ">
+            <div class="am-topbar-brand">
+                {$sysInfo.name}
+            </div>
+            <div class="header-nav">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <!--loop{$sysNav as $top}-->
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                            {$top.name}
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <!--loop{$top.menu as $parent}-->
+                            <li <!--if{$parent.cur}-->class="am-active"<!--{/if}--> ><a href="{$parent.url}"><i
+                                class="am-icon-{$parent.icon}"></i> {$parent.name}</a></li>
+                            <!--{/loop}-->
+                        </ul>
+                    </li>
+                    <!--{/loop}-->
+                </ul>
+            </div>
+            <div class="am-topbar-right dux-tools">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li>
+                        <a href="{url('default/index/Index/index')}" target="_blank"><i class="am-icon-home"></i></a>
+                    </li>
+                    <li>
+                        <a href="{url('system/Index/userData')}"><i class="am-icon-user"></i></a>
+                    </li>
+                    <li>
+                        <a href="{url('system/Login/logout')}"><i class="am-icon-power-off"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <nav class="dux-nav">
+            <h3>{$infoModule.info.name}
+                <small>{$infoModule.info.description}</small>
+            </h3>
+            <ol class="am-breadcrumb  am-breadcrumb-slash">
+                <!--loop{$sysBreadCrumb as $vo}-->
+                <li><a href="{$vo.url}">{$vo.name}</a></li>
+                <!--{/loop}-->
+            </ol>
+        </nav>
+
+    </header>
+
+
+    <aside class="dux-aside">
+        <ul>
+            <!--loop{$sysNavSub as $sub}-->
+            <li <!--if{$sub.cur}-->class="active"<!--{/if}-->>
+            <a href="{$sub.url}">
+                <i class="am-icon-{$sub.icon}"></i>
+
+                <p>{$sub.name}</p>
+            </a>
+            </li>
+            <!--{/loop}-->
+        </ul>
+    </aside>
+
+
+    <div class="dux-mobile-bg"></div>
+
+    <main class="dux-main">
+        {$layout}
+        <div class="am-text-center am-padding">© 2016 DuxCMF, Inc. Licensed under MIT license. <?php echo \Dux::runTime(); ?>s</div>
+    </main>
+</div>
+</body>
+
+<script>
+    Do('base', function () {
+        base.frame();
+    });
+</script>
+</html>

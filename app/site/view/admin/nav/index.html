@@ -1,0 +1,63 @@
+<div class="dux-body">
+    <div class="dux-box">
+        <div class="box-side">
+            <a class="am-btn am-btn-block am-btn-primary" href="{url('add', array('group_id' => $groupId))}">添加</a>
+            <br>
+            <div class="am-panel am-panel-default dux-panel">
+                <div class="am-panel-hd">导航分组</div>
+                <div class="am-panel-bd">
+                    <div class="dux-tree">
+                        <ul>
+                            <!--loop{$groupList as $vo}-->
+                            <!--if{$groupId == $vo.group_id}-->
+                            <li class="active">
+                                <!--{else}-->
+                            <li>
+                                <!--{/if}-->
+                                <h2><a href="{url('', array('group_id' => $vo.group_id))}">{$vo.name}</a></h2></li>
+                            <!--{/loop}-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div data-mango="table-bind" class=" dux-g">
+                <div class="dux-page-table">
+                    <table class="am-table dux-table" data-table>
+                        <thead>
+                        <tr>
+                            <th width="100">#</th>
+                            <th width="200">名称</th>
+                            <th>地址</th>
+                            <th>顺序</th>
+                            <th class="am-text-center" width="120">管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!--loop{(array)$list as $vo}-->
+                        <tr>
+                            <td>{$vo.nav_id}</td>
+                            <td>{$vo.cname}</td>
+                            <td>
+                                <a href="{$vo.url}" target="_blank">{$vo.url}</a>
+                            </td>
+                            <td>{$vo.sort}</td>
+                            <td class="am-text-center">
+                                <a class="am-btn am-btn-primary am-btn-xs" href="{url('edit', ['id'=>$vo[$pri]])}"
+                                   title="编辑"><i class="am-icon-pencil"></i></a>
+                                <a class="am-btn am-btn-danger am-btn-xs" href="javascript:;" data-url="{url('del')}"
+                                   data-id="{$vo[$pri]}" title="删除" data-del><i class=" am-icon-trash"></i></a>
+                            </td>
+                        </tr>
+                        <!--{/loop}-->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dux-page-foot am-cf">
+                    {$page}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

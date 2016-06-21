@@ -1,0 +1,73 @@
+body, html {
+    background: #2196f3;
+    height: 100%;
+}
+body {
+    background: url("../images/bg.jpg") no-repeat center center ;
+    background-size : cover;
+}
+.login-body {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 100px;
+}
+header {
+    text-align: center;
+    color: #fff;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    margin-top: 30px;
+}
+
+main {
+    color: #666;
+    padding:20px;
+    padding-bottom: 10px;
+}
+
+.am-form-group {
+    position: relative;
+}
+
+.am-form-group label {
+    position: absolute;
+    font-size:1.4rem;
+    top:6px;
+    left: 10px;
+}
+
+.am-form-group input {
+    border: 0 !important;
+    padding-left: 30px !important;
+}
+
+form .alert {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    background: #F44336;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+form .hide {
+    display: none;
+}
+
+.am-btn-primary {
+    background: #2196f3;
+}
+
+
+@media screen and (max-width: 640px) {
+    .login-body{
+        width: 100%;
+        padding-top: 10px;
+    }
+    header img {
+        display: none;
+    }
+
+}

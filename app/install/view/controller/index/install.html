@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>DuxCMS安装向导</title>
+    <link rel="stylesheet" href="__PUBLIC__/system/css/amazeui.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/install/css/style.css">
+    <script type="text/javascript" src="__PUBLIC__/system/js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/system/js/lib/amazeui.js"></script>
+</head>
+<body>
+<div class="dux-body">
+    <div class="dux-head">DuxCms内容管理系统 <span class="ver">{3}</span>
+        <small>安装向导</small>
+    </div>
+    <div class="am-cf">
+        <div class="dux-menu">
+            <ul class="am-nav">
+                <li><a href="#">1. 使用协议</a></li>
+                <li><a href="#">2. 环境检测</a></li>
+                <li><a href="#">3. 配置参数</a></li>
+                <li class="am-active"><a href="#">4. 完成安装</a></li>
+            </ul>
+        </div>
+        <div class="dux-main">
+            <div class="am-progress">
+                <div class="am-progress-bar" style="width: 33%">易用</div>
+                <div class="am-progress-bar am-progress-bar-success" style="width: 34%">扩展</div>
+                <div class="am-progress-bar am-progress-bar-warning" style="width: 33%">开源</div>
+            </div>
+            <form class="am-form am-form-horizontal" action="{url('install')}" type="post" data-am-validator>
+                <h1 class="dux-title">
+                    安装记录
+                </h1>
+                <div class="dux-content">
+                    <!--loop{$msgLog as $vo}-->
+                        <!--if{$vo.error}-->
+                        <span class="am-text-danger">{$vo.msg}</span>
+                        <!--{else}-->
+                        {$vo.msg}
+                        <!--{/if}-->
+                        <br>
+                    <!--{/loop}-->
+                </div>
+
+                <div class="dux-fun am-cf">
+                    <!--if{$error}-->
+                    <a class="am-btn am-btn-default am-fl" href="{url('config')}">上一步</a>
+                    <!--{else}-->
+                    <a class="am-btn am-btn-default am-fl" href="<?php echo ROOT_URL; ?>/">进入前台</a>
+                    <a class="am-btn am-btn-primary am-fr" href="{url('admin/system/Index/index')}">进入后台</a>
+                    <!--{/if}-->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+
+</script>

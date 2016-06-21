@@ -1,0 +1,71 @@
+<div class="dux-body">
+    <div class="dux-box">
+        <div class="box-side">
+            <div class="am-panel am-panel-default dux-panel">
+                <ul class="am-nav">
+                    <li class="am-active"><a href="{url('site/Config/index')}">站点信息</a></li>
+                    <li><a href="{url('site/Config/tpl')}">模板设置</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="am-panel am-panel-default dux-panel">
+                <div class="am-panel-hd">基本配置</div>
+                <div class="am-panel-bd">
+                    <form class="am-form  am-form-horizontal dux-form" method="post" action="{url()}" data-mango="form-bind">
+                        <fieldset>
+
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">站点标题</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="info_title" value="{$info.info_title}" placeholder="" required>
+                                    <div class="am-form-help">站点头部显示标题</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">站点关键词</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="info_keyword" value="{$info.info_keyword}" placeholder="">
+                                    <div class="am-form-help">针对搜索引擎设置的关键词</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">站点描述</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <textarea name="info_desc" maxlength="200">{$info.info_desc}</textarea>
+                                    <div class="am-form-help">针对搜索引擎设置的站点描述,最多200个字符</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">版权信息</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="info_copyright" value="{$info.info_copyright}" placeholder="">
+                                    <div class="am-form-help">站点底部版权信息</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">站点邮箱</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="info_email" value="{$info.info_email}" placeholder="">
+                                    <div class="am-form-help">站点联系邮箱</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">站点电话</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="info_tel" value="{$info.info_tel}" placeholder=""d>
+                                    <div class="am-form-help">站点服务联系电话</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                                    <button class="am-btn am-btn-primary" type="submit">保存</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

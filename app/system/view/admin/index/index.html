@@ -1,0 +1,222 @@
+<div class="am-g">
+    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+        <div class="am-panel dux-stat-widget">
+            <div class="am-panel-bd">
+                <i class="media-icon am-icon-btn blue am-icon-desktop"></i>
+                <div class="media-body">
+                    <h1 class="title">{intval($sumStats.web)}</h1>
+                    <p class="grey-text">电脑访问</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+        <div class="am-panel dux-stat-widget">
+            <div class="am-panel-bd">
+                <i class="media-icon am-icon-btn orange am-icon-wifi"></i>
+                <div class="media-body">
+                    <h1 class="title">{intval($sumStats.mobile)}</h1>
+                    <p class="grey-text">移动访问</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+        <div class="am-panel dux-stat-widget">
+            <div class="am-panel-bd">
+                <i class="media-icon am-icon-btn red am-icon-cube"></i>
+                <div class="media-body">
+                    <h1 class="title">{intval($sumStats.api)}</h1>
+                    <p class="grey-text">API访问</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-lg-3 am-u-md-6 am-u-sm-12">
+        <div class="am-panel dux-stat-widget">
+            <div class="am-panel-bd">
+                <i class="media-icon am-icon-btn green am-icon-book"></i>
+                <div class="media-body">
+                    <h1 class="title">{$contentStats}</h1>
+                    <p class="grey-text">内容数量</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-lg-8">
+        <div class="am-panel am-panel-default dux-panel">
+            <div class="am-panel-hd">站点访问</div>
+            <div class="am-panel-bd" style="height: 185px" id="stats-web"></div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-lg-6">
+                <div class="am-panel am-panel-default dux-panel">
+                    <div class="am-panel-hd">移动访问</div>
+                    <div class="am-panel-bd" style="height: 255px" id="stats-mobile"></div>
+                </div>
+            </div>
+            <div class="am-u-lg-6">
+                <div class="am-panel am-panel-default dux-panel">
+                    <div class="am-panel-hd">API访问</div>
+                    <div class="am-panel-bd" style="height: 255px" id="stats-api"></div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="am-u-lg-4">
+        <div class="am-panel dux-profile-widget">
+            <div class="profile-bg teal lighten-1"></div>
+            <img src="{$sysUserInfo.avatar}" class="profile-avatar" alt="img">
+            <div class="profile-title">{$sysUserInfo.nickname} ({$sysUserInfo.role_name})</div>
+            <p class="profile-text">于 {date('Y年m月d日 H:i', $sysUserInfo.login_time)} 登录</p>
+        </div>
+        <div class="am-panel am-panel-default dux-panel">
+            <div class="am-panel-hd">近期通知</div>
+            <ul class="dux-list-media">
+                <!--loop{$noticeList as $vo}-->
+                <li class="am-cf">
+                    <div class="media-img">
+                        <i class="am-icon-btn am-icon-{$vo.icon} am-{$vo.type}"></i></div>
+                    <div class="media-body">
+                        <h3>{$vo.content}</h3>
+                        <p>{date_tran($vo.time)}</p>
+                    </div>
+                </li>
+                <!--{/loop}-->
+                <!--if{empty($noticeList)}-->
+                <li class="am-cf">
+                    <div class="media-img">
+                        <i class="am-icon-btn am-icon-info am-primary"></i></div>
+                    <div class="media-body">
+                        <h3>欢迎使用DuxCmf内容管理框架</h3>
+                        <p>使用请遵循MIT开源协议</p>
+                    </div>
+                </li>
+                <!--{/if}-->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="am-g">
+    <div class="am-u-lg-6">
+        <div class="am-panel am-panel-default dux-panel">
+            <div class="am-panel-hd">系统环境</div>
+            <div class="am-panel-bd">
+                <table class="am-table dux-table dux-table-lg">
+                    <tbody>
+                    <tr>
+                        <td width="100">操作系统</td>
+                        <td colspan="3"><?PHP echo php_uname(s).' '.php_uname(r).' ('.php_uname(n).')';  ?></td>
+                    </tr>
+                    <tr>
+                        <td>WEB环境</td>
+                        <td>{$_SERVER ['SERVER_SOFTWARE']} / PHP {phpversion()}</td>
+                        <td width="100">数据库</td>
+                        <td><?php $config = \Config::get('dux.use_data'); echo $config['type']; ?></td>
+                    </tr>
+                    <tr>
+                        <td>服务器IP</td>
+                        <td>{$_SERVER['SERVER_ADDR']}</td>
+                        <td>上传限制</td>
+                        <td><?PHP echo get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许上传附件"; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Redis支持</td>
+                        <td><?php echo class_exists('Redis') ? '<span class="am-text-success">支持</span>' : '<span class="am-text-danger">不支持</span>'; ?></td>
+                        <td>Curl支持</td>
+                        <td><?php echo function_exists('curl_init') ? '<span class="am-text-success">支持</span>' : '<span class="am-text-danger">不支持</span>'; ?></td>
+                    </tr>
+                    <tr>
+                        <?php $config = \Config::get('dux.use'); ?>
+                        <td>日志状态</td>
+                        <td><?php echo $config['log'] ? '<span class="am-text-success">开启</span>' : '<span class="am-text-warning">关闭</span>'; ?></td>
+                        <td>调试状态</td>
+                        <td><?php echo $config['debug'] ? '<span class="am-text-success">开启</span>' : '<span class="am-text-warning">关闭</span>'; ?></td>
+                    </tr>
+                    <tr>
+                        <td>屏蔽函数</td>
+                        <td colspan="3"><?php echo get_cfg_var( "disable_functions")?get_cfg_var( "disable_functions"): "无" ; ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-lg-6">
+        <div class="am-panel am-panel-default dux-panel">
+            <div class="am-panel-hd">程序信息</div>
+            <div class="am-panel-bd">
+                <table class="am-table dux-table dux-table-lg">
+                    <tbody>
+                    <tr>
+                        <td width="100">程序版本</td>
+                        <td>{$verInfo.ver} ({$verInfo.date})</td>
+                    </tr>
+                    <tr>
+                        <td width="100">框架版本</td>
+                        <td><?php echo VERSION; ?> (<?php echo VERSION_DATE; ?>)</td>
+                    </tr>
+                    <tr>
+                        <td width="100">开发支持</td>
+                        <td>{$useInfo.team}</td>
+                    </tr>
+                    <tr>
+                        <td width="100">支持网站</td>
+                        <td><a href="{$useInfo.home}" target="_blank">{$useInfo.home}</a></td>
+                    </tr>
+                    <tr>
+                        <td width="100">客服电话</td>
+                        <td>
+                            {$useInfo.tel}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100">客服QQ</td>
+                        <td>{$useInfo.qq}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    Do('chart', function () {
+        var webStats = {$webStats};
+        var mobileStats = {$mobileStats};
+        var apiStats = {$apiStats};
+        showData(webStats, 'web');
+        showData(mobileStats, 'mobile');
+        showData(apiStats, 'api');
+        function showData(data, type) {
+            data = getData(data);
+            new Chartist.Line('#stats-' + type, {
+                labels: data.labels,
+                series: [
+                    {
+                        data: data.nums
+                    }
+                ]
+            });
+        }
+        function getData(data) {
+            var labels = [];
+            var nums = [];
+            for (var key in data) {
+                labels.push(key);
+                nums.push(data[key]);
+            }
+            return {
+                'labels': labels,
+                'nums': nums
+            };
+        }
+    });
+</script>

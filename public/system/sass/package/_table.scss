@@ -1,0 +1,90 @@
+
+.dux-table {
+
+  @at-root .dux-table-dialog, & {
+
+    margin: 0;
+    >tbody>tr>td, >tbody>tr>th, >tfoot>tr>td, >tfoot>tr>th, >thead>tr>td, >thead>tr>th {
+      border: none;
+      padding: .9rem .8rem;
+      display: table-cell;
+      text-align: left;
+      vertical-align: middle;
+    }
+    >tbody>tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    td,th {
+      font-size:1.2rem;
+    }
+
+    thead {
+      background: #e7e8ea;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media only screen and (max-width: 992px) {
+
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    position: relative;
+
+    >tbody {
+      display: block;
+      width: auto;
+      position: relative;
+      overflow-x: auto;
+      white-space: nowrap;
+      >tr {
+        display: inline-block;
+        vertical-align: top;
+        padding: 0 10px;
+        >td {
+          display: block;
+          min-height: 1.25em;
+          text-align: left !important;
+          margin: 0;
+          vertical-align: top;
+        }
+      }
+    }
+
+    >thead {
+      display: block;
+      float: left;
+      border: 0;
+      border-right: 1px solid #d0d0d0;
+      >tr {
+        display: block;
+        padding: 0 10px 0 0;
+        margin: 0;
+        vertical-align: top;
+        >th {
+          width: 100px !important;
+          display: block;
+          text-align: right !important;
+        }
+      }
+
+    }
+
+  }
+
+}
+
+.dux-table-lg {
+  td,th {
+    font-size:1.4rem;
+  }
+}
+
+.am-nav-tabs>li.am-active>a, .am-nav-tabs>li.am-active>a:focus, .am-nav-tabs>li.am-active>a:hover {
+  font-size:1.4rem;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}

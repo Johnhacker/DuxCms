@@ -1,0 +1,35 @@
+.dux-nav {
+  color: #666;
+  border-bottom: 1px solid #d3d7db;
+  border-top: 1px solid #eee;
+  background-color: #fff;
+  line-height: $nav-height;
+  position: relative;
+  margin-left:$aside-width;
+  padding: 0 10px;
+  ol {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    padding: 0;
+    margin: 0;
+  }
+  h3 {
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: #444;
+    small {
+      color: #999;
+      font-size:1.2rem;
+
+      &:before {
+        font-size:1.4rem;
+        color: #ccc;
+        padding-left: 0;
+        content: "/\00a0";
+      }
+    }
+  }
+}

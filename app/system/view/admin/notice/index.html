@@ -1,0 +1,39 @@
+<div data-mango="table-bind">
+    <div class="dux-page-table">
+        <table class="am-table dux-table" data-table>
+            <thead>
+            <tr>
+                <th width="100" class="am-text-center">@</th>
+                <th>通知内容
+                <th class="am-text-center" width="100">删除</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--loop{$list as $vo}-->
+            <tr>
+                <td class="am-text-center"><i class="am-icon-btn am-icon-btn-sm am-{$vo.type} am-icon-{$vo.icon}"></i></td>
+                <td>{$vo.content} ({date('Y-m-d H:i', $vo.time)})
+                    <!--if{$vo.url}-->
+                    <a href="{$vo.url}">详情 &lt;&lt;</a>
+                    <!--{/if}-->
+                </td>
+                <td class="am-text-center">
+                    <a class="am-btn am-btn-danger am-btn-xs" href="javascript:;" data-url="{url('del')}"
+                       data-id="{$vo[$pri]}" title="删除" data-del><i class=" am-icon-trash"></i></a>
+                </td>
+            </tr>
+            <!--{/loop}-->
+            <!--if{empty($list)}-->
+            <tr>
+                <td rowspan="2" class="am-text-center">
+                    暂无通知消息
+                </td>
+            </tr>
+            <!--{/if}-->
+            </tbody>
+        </table>
+    </div>
+    <div class="dux-page-foot am-cf">
+        {$page}
+    </div>
+</div>

@@ -1,0 +1,40 @@
+.dux-aside {
+  position: fixed;
+  top:$header-height;
+  left: 0;
+  bottom: 0;
+  width: $aside-width;
+  background: #e6e7e8;
+  border-right:1px solid #ccc;
+  z-index: 100;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    text-align: center;
+
+
+    a {
+      display: block;
+      color: #444;
+      padding: 10px 0;
+      font-size: 1.2rem;
+      i {
+        font-size:1.8rem;
+      }
+      &:hover {
+        background: #ddd;
+      }
+
+    }
+
+    &.active > a, a:hover {
+      background: #ddd;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}

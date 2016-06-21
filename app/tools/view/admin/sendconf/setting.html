@@ -1,0 +1,34 @@
+<div class="dux-page-header am-cf">
+    <div class="page-title">
+        <a class="am-btn am-btn-primary" href="{url('index')}"> 接口列表</a>
+    </div>
+    <div class="page-action">
+        <a class="am-btn am-btn-danger" href="javascript:location.reload();"><i class="am-icon-refresh"></i></a>
+    </div>
+</div>
+<div class="dux-body">
+    <div class="am-panel am-panel-default dux-panel">
+        <div class="am-panel-hd">{$typeInfo.name}设置</div>
+        <div class="am-panel-bd">
+            <form class="am-form  am-form-horizontal dux-form" data-mango="form-bind" method="post">
+                <fieldset>
+                    <!--loop{$ruleList as $key => $vo}-->
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">{$vo}</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="{$key}" value="{$settingInfo[$key]}" required>
+                        </div>
+                    </div>
+                    <!--{/loop}-->
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                            <input type="hidden" name="config_id" value="{$info.config_id}">
+                            <input type="hidden" name="type" value="{$type}">
+                            <button class="am-btn am-btn-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

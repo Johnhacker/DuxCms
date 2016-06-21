@@ -1,0 +1,138 @@
+<div class="dux-page-header am-cf">
+    <div class="page-title">
+        <a class="am-btn am-btn-primary" href="{url('index')}"> 分类列表</a>
+    </div>
+    <div class="page-action">
+        <a class="am-btn am-btn-danger" href="javascript:location.reload();"><i class="am-icon-refresh"></i></a>
+    </div>
+</div>
+
+<div class="dux-body">
+    <div class="am-panel am-panel-default dux-panel">
+        <div class="am-panel-hd">{$assignName}分类</div>
+        <div class="am-panel-bd">
+            <form class="am-form  am-form-horizontal dux-form" data-mango="form-bind" method="post">
+                <fieldset>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">上级分类</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select data-am-selected="{btnWidth: '100%'}" name="parent_id" required>
+                                <option value="0">==顶级分类==</option>
+                                <!--loop{(array)$classList as $vo}-->
+                                <option <!--if{$vo.class_id == $info.parent_id}--> selected <!--{/if}--> value="{$vo.class_id}">{$vo.cname}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">分类名称</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="name" value="{$info.name}" placeholder="请输入分类名称" required>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">分类顺序</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="number" name="sort" value="{$info.sort}" placeholder="请输入顺序" >
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">副分类名称</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="subname" value="{$info.subname}" placeholder="请输入分类名称" >
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">封面图</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <!--if{$info.image}-->
+                            <div class="am-margin-bottom" style="">
+                                <img src="{$info.image}" class="am-img-thumbnail" width="200"  alt=""/>
+                            </div>
+                            <!--{/if}-->
+                            <div class="am-input-group">
+                                <input class="am-form-field" name="image" id="image" value="{$info.image}"
+                                       placeholder="可选,上传导航封面图">
+                                        <span class="am-input-group-btn">
+                                            <button class="am-btn am-btn-default" type="button" data-mango="form-upload"
+                                                    data-target="#image" data-type="jpg,png,bmp"><i
+                                                    class="am-icon-upload"></i></button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">跳转地址</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="url" value="{$info.url}" placeholder="可选,栏目跳转到外部地址">
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">分类关键词</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="keyword" value="{$info.keyword}" placeholder="可选,请输入关键词">
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">分类描述</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <textarea name="description" placeholder="可选,分类描述信息">{$info.description}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">筛选模型</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select data-am-selected="{btnWidth: '100%'}" name="filter_id" required>
+                                <option value="0">==无筛选==</option>
+                                <!--loop{(array)$filterList as $vo}-->
+                                <option <!--if{$vo.filter_id == $info.filter_id}--> selected <!--{/if}--> value="{$vo.filter_id}">{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">栏目模板</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select data-mango="form-chosen" name="tpl_class" required>
+                                <option value="">==默认==</option>
+                                <!--loop{$tplList as $vo}-->
+                                <option value="{$vo.value}" <!--if{$info.tpl_class == $vo.value}-->  selected <!--{/if}--> >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">内容模板</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select data-mango="form-chosen" name="tpl_content" required>
+                                <option value="">==默认==</option>
+                                <!--loop{$tplList as $vo}-->
+                                <option value="{$vo.value}" <!--if{$info.tpl_content == $vo.value}-->  selected <!--{/if}--> >{$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                            <input type="hidden" name="category_id" value="{$info.category_id}">
+                            <input type="hidden" name="class_id" value="{$info.class_id}">
+                            <input type="hidden" name="model_id" value="{$modelId}">
+                            <button class="am-btn am-btn-primary" type="submit" disabled>保存</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

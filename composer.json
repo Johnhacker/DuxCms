@@ -1,0 +1,9 @@
+{
+    "require": {
+        "php": "5.6.9",
+        "mysql": "*",
+        "ext-redis": "*",
+        "ext-gd" : "*",
+        "ext-zib" : "*"
+    }
+}

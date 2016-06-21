@@ -1,0 +1,6 @@
+/.idea/
+.DS_Store
+/data/cache/*
+/data/log/*
+/upload/*
+/install.lock

@@ -1,0 +1,132 @@
+<div class="dux-body">
+    <div class="dux-box">
+        <div class="box-side">
+            <div class="am-panel am-panel-default dux-panel">
+                <ul class="am-nav">
+                    <li><a href="{url('system/Config/index')}">基本配置</a></li>
+                    <li class="am-active"><a href="{url('system/Config/user')}">系统设置</a></li>
+                    <li><a href="{url('system/Config/info')}">系统信息</a></li>
+                    <li><a href="{url('system/Config/upload')}">上传设置</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="am-panel am-panel-default dux-panel">
+                <div class="am-panel-hd">系统设置</div>
+                <div class="am-panel-bd">
+                    <form class="am-form  am-form-horizontal dux-form" method="post" action="{url()}" data-mango="form-bind">
+                        <fieldset>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">系统调试</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <div class="am-g">
+                                        <label class="am-radio-inline">
+                                            <!--if{$info.debug}-->
+                                            <input name="debug" value="true" checked="checked" type="radio">
+                                            <!--{else}-->
+                                            <input name="debug" value="true" type="radio">
+                                            <!--{/if}-->
+                                            开启
+                                        </label>
+                                        <label class="am-radio-inline">
+                                            <!--if{!$info.debug}-->
+                                            <input name="debug" checked="checked" value="false" type="radio">
+                                            <!--{else}-->
+                                            <input name="debug" value="false" type="radio">
+                                            <!--{/if}-->
+                                            关闭
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">日至开关</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <div class="am-g">
+                                        <label class="am-radio-inline">
+                                            <!--if{$info.log}-->
+                                            <input name="log" value="true" checked="checked" type="radio">
+                                            <!--{else}-->
+                                            <input name="log" value="true" type="radio">
+                                            <!--{/if}-->
+                                            开启
+                                        </label>
+                                        <label class="am-radio-inline">
+                                            <!--if{!$info.log}-->
+                                            <input name="log" checked="checked" value="false" type="radio">
+                                            <!--{else}-->
+                                            <input name="log" value="false" type="radio">
+                                            <!--{/if}-->
+                                            关闭
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">加密码</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="safe_key" value="{$info.safe_key}"
+                                           required>
+                                    <div class="am-form-help">系统内部加密密钥,根据需要更改设置</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">会话前缀</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="cookie_pre" value="{$info.cookie_pre}"
+                                           required>
+                                    <div class="am-form-help">cookie与session等会话前缀，修改避免冲突</div>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">通讯码</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <input type="text" name="com_key" value="{$info.com_key}"
+                                           required>
+                                    <div class="am-form-help">外部API之间通讯使用的安全码</div>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">模板缓存</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <select data-placeholder="选择类型" name="tpl_cache" data-am-selected>
+                                        <!--loop{$cacheList as $key => $vo}-->
+                                        <option value="{$key}" <!--if{$key == $info.tpl_cache}--> selected <!--{/loop}--> >{$key}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">会话缓存</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <select data-placeholder="选择类型" name="session_cache" data-am-selected>
+                                        <!--loop{$cacheList as $key => $vo}-->
+                                        <option value="{$key}" <!--if{$key == $info.session_cache}--> selected <!--{/loop}--> >{$key}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <label class="am-u-md-2 am-u-sm-12 am-form-label">数据缓存</label>
+                                <div class="am-u-md-10 am-u-sm-12">
+                                    <select data-placeholder="选择类型" name="data_cache" data-am-selected>
+                                        <!--loop{$cacheList as $key => $vo}-->
+                                        <option value="{$key}" <!--if{$key == $info.data_cache}--> selected <!--{/loop}--> >{$key}</option>
+                                        <!--{/loop}-->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="am-form-group">
+                                <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                                    <button class="am-btn am-btn-primary" type="submit">保存</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

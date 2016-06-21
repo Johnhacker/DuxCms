@@ -1,0 +1,113 @@
+<div class="dux-page-header am-cf">
+    <div class="page-title">
+        <a class="am-btn am-btn-primary" href="{url('index')}"> 发送列表</a>
+    </div>
+    <div class="page-action">
+        <a class="am-btn am-btn-danger" href="javascript:location.reload();"><i class="am-icon-refresh"></i></a>
+    </div>
+</div>
+<div class="dux-body">
+    <div class="am-panel am-panel-default dux-panel">
+        <div class="am-panel-hd">{$assignName}用户</div>
+        <div class="am-panel-bd">
+            <form class="am-form  am-form-horizontal dux-form" data-mango="form-bind" method="post">
+                <fieldset>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">推送类型</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select name="type" data-am-selected="{btnWidth: '100%'}">
+                                <!--loop{(array)$typeList as $key => $vo}-->
+                                <option value="{$key}">
+                                    {$vo.name}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">接收账户</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="receive" placeholder="接收方用户、账户等" required>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">选择模板</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <select id="tpl" data-am-selected="{btnWidth: '100%'}">
+                                <option value="0">==您可以选择发送模板==</option>
+                                <!--loop{(array)$tplList as $key => $vo}-->
+                                <option value="{$vo.tpl_id}">{$vo.title}</option>
+                                <!--{/loop}-->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">发送标题</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <input type="text" name="title" id="title" placeholder="接收方用户、账户等" required>
+                        </div>
+                    </div>
+
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">发送内容(HTML)</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <textarea name="content" id="content" placeholder="推送内容" required></textarea>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label class="am-u-md-2 am-u-sm-12 am-form-label">附加参数</label>
+                        <div class="am-u-md-10 am-u-sm-12">
+                            <button class="am-btn am-btn-primary" type="button" id="param-add" disabled>增加参数</button>
+                        </div>
+                    </div>
+
+
+                    <div id="param" style="padding-bottom: 20px"></div>
+
+                    <div class="am-form-group">
+                        <div class="am-u-sm-offset-12 am-u-md-offset-2">
+                            <button class="am-btn am-btn-primary" type="submit" disabled>增加</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="param-html">
+    <div class="am-form-group">
+        <div class="am-u-sm-offset-12 am-u-md-offset-2 ">
+            <div class="am-g dux-g">
+            <div class="am-u-md-3">
+            <input type="text" name="param_key[]" placeholder="参数名" required>
+            </div>
+            <div class="am-u-md-3">
+            <input type="text" name="param_val[]" placeholder="参数值" required>
+                </div>
+            <div class="am-u-md-3">
+            <button class="am-btn am-btn-danger js-del" type=button>删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    Do.ready(function () {
+        $('#param-add').click(function () {
+            var html = $('#param-html').html();
+            $('#param').append(html);
+        });
+        $('#param').on('click','.js-del', function () {
+            $(this).parents('.am-form-group').remove();
+        });
+        $('#tpl').change(function () {
+            $.post("{url('tools/SendTpl/getTpl')}",{id:$(this).val()}, function (json) {
+                $('#title').val(json.info.title);
+                $('#content').val(json.info.content);
+            }, 'json')
+        });
+    });
+</script>
